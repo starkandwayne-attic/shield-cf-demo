@@ -1,0 +1,6 @@
+---
+applications:
+- name: shield-cf-demo
+  memory: 256M
+  instances: 1
+  path: .

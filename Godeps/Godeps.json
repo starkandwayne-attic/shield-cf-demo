@@ -1,0 +1,21 @@
+{
+	"ImportPath": "github.com/starkandwayne/shield-cf-demo",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/garyburd/redigo/internal",
+			"Comment": "v1.1.0-17-g34a326d",
+			"Rev": "34a326de1fea52965fa5ad664d3fc7163dd4b0a1"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Comment": "v1.1.0-17-g34a326d",
+			"Rev": "34a326de1fea52965fa5ad664d3fc7163dd4b0a1"
+		},
+		{
+			"ImportPath": "github.com/jhunt/vcaptive",
+			"Rev": "785beb84797b353461f85eeaee400691f940f5d8"
+		}
+	]
+}
