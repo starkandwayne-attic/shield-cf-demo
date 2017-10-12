@@ -15,10 +15,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-
-  fs := http.FileServer(http.Dir("htdocs"))
-  http.Handle("/", fs)
-
   services, err := vcaptive.ParseServices(os.Getenv("VCAP_SERVICES"))
 
   if err != nil {
@@ -72,10 +68,6 @@ func main() {
 
   fmt.Println("key value added!")
 
-// http.HandleFunc("/", handler)
-// http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil)
-
-  log.Println("Listening...")
-  // http.ListenAndServe(":3000", nil)
+  http.Handle("/", http.FileServer(http.Dir("htdocs")))
   http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil)
 }
