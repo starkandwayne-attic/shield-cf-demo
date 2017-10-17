@@ -21,15 +21,13 @@
         color: crimson; margin: 2em 0; }
     a:hover { text-decoration: underline; }
     footer { font-size: 11pt; position: fixed; left: 260px; bottom: 0.5em; }
+    a.delete { display: none; }
     </style>
   </head>
   <body>
     <h1>SHIELD<span>MySQL Demo<span></h1>
-    <pre>Data System:  <em>MySQL</em>
-# Records:    <em>4,236</em>
-# Tables:     <em>15</em>
-Verification: <em>c76ecc173eb3a</em></pre>
-    <a href="/delete">DELETE THE DATA&hellip;</a>
+    <pre>loading...</pre>
+    <a class="delete" href="/delete">DELETE THE DATA&hellip;</a>
     <footer>SHIELD Copyright &copy; 2017 Stark &amp; Wayne, LLC</footer>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
@@ -40,6 +38,7 @@ Verification: <em>c76ecc173eb3a</em></pre>
           success: function (data) {
             $('h1 span').text(data.system + ' Demo');
             $('pre').html(data.summary.replace(/\*([^\*])*\*/, '<em>$1</em>') + 'Verification: <em>'+data.verification+'</em>');
+            $('a.delete').show();
           }
         });
       });
