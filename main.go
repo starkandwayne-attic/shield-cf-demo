@@ -5,13 +5,14 @@ import (
   "os"
   "log"
   "net/http"
+  "encoding/json"
 
   "github.com/garyburd/redigo/redis"
   "github.com/jhunt/vcaptive"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-  fmt.Fprintf(w, "Hi there, sending this message from main.go handler!")
+  fmt.Fprintf(w, "Hi there, sending this message from main.go func handler!")
 }
 
 func main() {
@@ -28,7 +29,7 @@ func main() {
     os.Exit(2)
   }
 
- host, ok := instance.GetString("host")
+  host, ok := instance.GetString("host")
   if !ok {
     fmt.Fprintf(os.Stderr, "VCAP_SERVICES: '%s' service has no 'host' credential\n", instance.Label)
     os.Exit(3)
@@ -66,7 +67,29 @@ func main() {
       log.Fatal(err)
   }
 
-  fmt.Println("key value added!")
+  fmt.Println("key value: key-example/value-example  added!")
+
+  type StructData struct {
+    System string `json:"system"`
+    Summary string `json:"summary"`
+	Verification string `json:"verification"`
+  }
+
+  data := StructData{
+    System: "MySQL",
+    Summary: "# Records: 4,236\n# Tables: 15\n",
+    Verification: "c76ecc173eb3a",
+  }
+
+  jData, err:= json.Marshal(data)
+  if err != nil {
+    fmt.Println("error:", err)
+  }
+
+  http.HandleFunc("/data", func (w http.ResponseWriter, r *http.Request) {
+    w.Header().Set("Content-Type", "application/json")
+    w.Write(jData)
+  } )
 
   http.Handle("/", http.FileServer(http.Dir("htdocs")))
   http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil)
