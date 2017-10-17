@@ -31,5 +31,18 @@
 Verification: <em>c76ecc173eb3a</em></pre>
     <a href="/delete">DELETE THE DATA&hellip;</a>
     <footer>SHIELD Copyright &copy; 2017 Stark &amp; Wayne, LLC</footer>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+      $(function () {
+        $.ajax({
+          type: 'GET',
+          url:  '/data',
+          success: function (data) {
+            $('h1 span').text(data.system + ' Demo');
+            $('pre').html(data.summary.replace(/\*([^\*])*\*/, '<em>$1</em>') + 'Verification: <em>'+data.verification+'</em>');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
