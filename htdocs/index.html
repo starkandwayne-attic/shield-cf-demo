@@ -36,8 +36,9 @@
           type: 'GET',
           url:  '/data',
           success: function (data) {
+            console.log(data);
             $('h1 span').text(data.system + ' Demo');
-            $('pre').html(data.summary.replace(/\*([^\*])*\*/, '<em>$1</em>') + 'Verification: <em>'+data.verification+'</em>');
+            $('pre').html(data.summary.replace(/\*([^\*]*)\*/, '<em>$1</em>') + 'Verification: <em>'+data.verification+'</em>');
             $('a.delete').show();
           }
         });
