@@ -39,8 +39,25 @@
             console.log(data);
             $('h1 span').text(data.system + ' Demo');
             $('pre').html(data.summary.replace(/\*([^\*]*)\*/, '<em>$1</em>') + 'Verification: <em>'+data.verification+'</em>');
-            $('a.delete').show();
+            if (data.ok) {
+              $('a.delete').show();
+            }
           }
+        });
+
+        $('a.delete').on('click', function (event) {
+          event.preventDefault();
+          $.ajax({
+            type: 'DELETE',
+            url:  '/data',
+            success: function () {
+              document.location.href = '/';
+            },
+            error: function (xhr) {
+              $('pre').html('error: '+xhr.responseText);
+              $('a.delete').hide();
+            }
+          });
         });
       });
     </script>
