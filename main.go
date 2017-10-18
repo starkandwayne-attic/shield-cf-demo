@@ -13,7 +13,7 @@ type Data struct {
 	System       string `json:"system"`
 	Summary      string `json:"summary"`
 	Verification string `json:"verification"`
-	OK bool `json:"ok"`
+	OK           bool   `json:"ok"`
 }
 
 type System interface {
@@ -42,9 +42,9 @@ func main() {
 	}
 
 	var (
-		name string
+		name   string
 		system System
-		found bool
+		found  bool
 	)
 	/* loop over our known Systems and find the first one that matches */
 	found = false
